@@ -9,15 +9,17 @@ const Orders = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchOrders = async () => {
-      try {
-        const response = await axios.get(
-          'http://localhost:4000/api/orders/getall',
-          {
-            headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-          }
-        );
+useEffect(() => {
+  const fetchOrders = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/orders/getall`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
 
         const formatted = response.data.map(order => ({
           ...order,
@@ -43,13 +45,21 @@ const Orders = () => {
   }, []);
 
   const handleStatusChange = async (orderId, newStatus) => {
-    try {
-      await axios.put(`http://localhost:4000/api/orders/getall/${orderId}`, { status: newStatus });
-      setOrders(orders.map(o => o._id === orderId ? { ...o, status: newStatus } : o));
-    } catch (err) {
-      alert(err.response?.data?.message || 'Failed to update order status');
-    }
-  };
+  try {
+    await axios.put(
+      `${import.meta.env.VITE_API_URL}/api/orders/getall/${orderId}`,
+      { status: newStatus }
+    );
+
+    setOrders(
+      orders.map(o =>
+        o._id === orderId ? { ...o, status: newStatus } : o
+      )
+    );
+  } catch (err) {
+    alert(err.response?.data?.message || 'Failed to update order status');
+  }
+};
 
   if (loading) return (
     <div className={layoutClasses.page + ' flex items-center justify-center'}>
