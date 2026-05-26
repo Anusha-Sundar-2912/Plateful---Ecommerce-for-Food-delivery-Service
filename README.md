@@ -123,7 +123,7 @@ FRONTEND_URL=http://localhost:5173
 
 ```env
 VITE_API_URL=https://backend-y7v7.onrender.com
-VITE_WHATSAPP_NUMBER=7977896184
+VITE_WHATSAPP_NUMBER=xxxxxxxxxx
 ```
 
 ---
