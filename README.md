@@ -13,7 +13,7 @@ https://plateful-ecommerce-for-food-deliver.vercel.app
 https://plateful-admin.vercel.app
 
 ### ⚙️ Backend API
-https://backend-y7v7.onrender.com
+https://backend-y7w7.onrender.com/
 
 ---
 
