@@ -24,12 +24,7 @@ const __dirname = path.dirname(__filename);
 
 app.use(
   cors({
-    origin: [
-      'http://localhost:5173',
-      'http://localhost:5174',
-      'https://plateful-ecommerce-for-food-deliver.vercel.app',
-      'https://plateful-admin.vercel.app',
-    ],
+    origin: true,
     credentials: true,
   })
 );
