@@ -19,15 +19,17 @@ const OurMenu = () => {
   const cartItems = rawCart.filter(ci => ci.item);
 
   useEffect(() => {
-    const fetchMenu = async () => {
-      try {
-        const res = await axios.get('http://localhost:4000/api/items');
-        const byCategory = res.data.reduce((acc, item) => {
-          const cat = item.category || 'Uncategorized';
-          acc[cat] = acc[cat] || [];
-          acc[cat].push(item);
-          return acc;
-        }, {});
+  const fetchMenu = async () => {
+    try {
+      const res = await axios.get(
+  `https://backend-y7w7.onrender.com/api/items`
+);
+      const byCategory = res.data.reduce((acc, item) => {
+        const cat = item.category || 'Uncategorized';
+        acc[cat] = acc[cat] || [];
+        acc[cat].push(item);
+        return acc;
+      }, {});
         setMenuData(byCategory);
       } catch (err) {
         console.error('Failed to load menu items:', err);
