@@ -80,7 +80,7 @@ const OurMenu = () => {
   displayItems = displayItems.slice(0, 12);
 
   return (
-    <div className="bg-gradient-to-br from-[#1a120b] via-[#2a1e14] to-[#3e2b1d] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
+    <div className="mt-24 bg-gradient-to-br from-[#1a120b] via-[#2a1e14] to-[#3e2b1d] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
       <div className="max-w-7xl mx-auto">
 
         {/* Title */}
@@ -129,7 +129,7 @@ const OurMenu = () => {
                 {/* Image */}
                 <div className="relative h-48 sm:h-56 md:h-60 flex items-center justify-center bg-black/10">
                   <img
-                    src={item.imageUrl || item.image}
+                    src={(item.imageUrl || item.image)?.replace('http://', 'https://')}
                     alt={item.name}
                     className="max-h-full max-w-full object-contain"
                   />
