@@ -17,7 +17,7 @@ const SpecialOffer = () => {
   // Fetch menu items
   useEffect(() => {
     axios
-      .get('http://localhost:4000/api/items')
+      .get(`${import.meta.env.VITE_API_URL}/api/items`)
       .then(res => setItems(res.data.items ?? res.data))
       .catch(err => console.error(err));
   }, []);
@@ -52,7 +52,7 @@ const SpecialOffer = () => {
                 {/* Image & Stats */}
                 <div className="relative h-72 overflow-hidden">
                   <img
-                    src={item.imageUrl}
+                    src={item.imageUrl?.replace('http://', 'https://')}
                     alt={item.name}
                     className="w-full h-full object-cover brightness-90 group-hover:brightness-110 duration-500"
                   />
