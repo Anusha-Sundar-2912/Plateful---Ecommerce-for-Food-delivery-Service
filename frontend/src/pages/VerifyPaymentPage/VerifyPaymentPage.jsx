@@ -29,11 +29,14 @@ const VerifyPaymentPage = () => {
             return;
         }
 
-        // Stripe says success=true & we have a session_id:
-        axios.get('http://localhost:4000/api/orders/confirm', {
-            params: { session_id },
-            headers: authHeaders
-        })
+       // Stripe says success=true & we have a session_id:
+        axios.get(
+                    `${import.meta.env.VITE_API_URL}/api/orders/confirm`,
+                            {
+                                 params: { session_id },
+                                headers: authHeaders,
+                            }
+                        )
             .then(() => {
                 // Only clear the cart on true success:
                 clearCart();
