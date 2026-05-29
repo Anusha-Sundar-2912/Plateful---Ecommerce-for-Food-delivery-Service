@@ -15,22 +15,27 @@ const OurMenuHome = () => {
   const cartItems = rawCart.filter(ci => ci.item);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/items')
-      .then(res => {
-        const grouped = res.data.reduce((acc, item) => {
-          acc[item.category] = acc[item.category] || [];
-          acc[item.category].push(item);
-          return acc;
-        }, {});
-        setMenuData(grouped);
-      })
-      .catch(console.error);
-  }, []);
+  axios
+    .get(`${import.meta.env.VITE_API_URL}/api/items`)
+    .then(res => {
+      const grouped = res.data.reduce((acc, item) => {
+        acc[item.category] = acc[item.category] || [];
+        acc[item.category].push(item);
+        return acc;
+      }, {});
+
+      setMenuData(grouped);
+    })
+    .catch(console.error);
+}, []);
 
   // Find cart entry by product ID
   const getCartEntry = id => cartItems.find(ci => ci.item?._id === id);
   const getQuantity = id => getCartEntry(id)?.quantity ?? 0;
   const displayItems = (menuData[activeCategory] || []).slice(0, 4);
+  console.log("activeCategory:", activeCategory);
+console.log("menuData:", menuData);
+console.log("displayItems:", displayItems);
 
   return (
     <div className="bg-gradient-to-br from-[#1a120b] via-[#2a1e14] to-[#3e2b1d] min-h-screen py-16 px-4 sm:px-6 lg:px-8">
