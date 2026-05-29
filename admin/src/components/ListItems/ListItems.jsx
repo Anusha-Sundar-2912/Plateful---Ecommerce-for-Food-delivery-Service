@@ -9,32 +9,41 @@ const ListItems = () => {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch items from API
-  useEffect(() => {
-    const fetchItems = async () => {
-      try {
-        const { data } = await axios.get('http://localhost:4000/api/items');
-        setItems(data);
-      } catch (err) {
-        console.error('Error fetching items:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchItems();
-  }, []);
-
-  // Delete handler
-  const handleDelete = async (itemId) => {
-    if (!window.confirm('Are you sure you want to delete this item?')) return;
+// Fetch items from API
+useEffect(() => {
+  const fetchItems = async () => {
     try {
-      await axios.delete(`http://localhost:4000/api/items/${itemId}`);
-      setItems(prev => prev.filter(item => item._id !== itemId));
-      console.log('Deleted item ID:', itemId);
+      const { data } = await axios.get(
+        `${import.meta.env.VITE_API_URL}/api/items`
+      );
+      console.log("ITEMS:", data);
+      setItems(data);
     } catch (err) {
-      console.error('Error deleting item:', err);
+      console.error('Error fetching items:', err);
+    } finally {
+      setLoading(false);
     }
   };
+
+  fetchItems();
+}, []);
+
+// Delete handler
+const handleDelete = async (itemId) => {
+  if (!window.confirm('Are you sure you want to delete this item?')) return;
+
+  try {
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/api/items/${itemId}`
+    );
+
+    setItems(prev => prev.filter(item => item._id !== itemId));
+
+    console.log('Deleted item ID:', itemId);
+  } catch (err) {
+    console.error('Error deleting item:', err);
+  }
+};
 
   const renderStars = (rating) =>
     [...Array(5)].map((_, i) => (
