@@ -32,11 +32,10 @@ const CheckoutPage = () => {
 
   if (paymentStatus === 'success' && sessionId) {
     // Confirm the payment and create order on the backend
-    axios.post(
-      `${import.meta.env.VITE_API_URL}/api/orders/confirm`,
-      { sessionId },
-      { headers: authHeaders }
-    )
+    axios.get(
+  `${import.meta.env.VITE_API_URL}/api/orders/confirm?session_id=${sessionId}`,
+  { headers: authHeaders }
+)
           .then(({ data }) => {
             // Only clear cart when payment truly succeeded
             clearCart();
