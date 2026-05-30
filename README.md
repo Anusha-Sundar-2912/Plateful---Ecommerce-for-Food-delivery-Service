@@ -420,7 +420,3 @@ VITE_API_URL=https://backend-y7w7.onrender.com
 * Real-World Food Delivery Workflow
 
 ---
-
-<p align="center">
-  Built with ❤️ using React, Node.js, Express, MongoDB, Stripe, and Cloudinary.
-</p>
