@@ -28,14 +28,15 @@ const CheckoutPage = () => {
     const sessionId = params.get('session_id');
 
     if (paymentStatus) {
-      setLoading(true);
-      if (paymentStatus === 'success' && sessionId) {
-        // Confirm the payment and create order on the backend
-        axios.post(
-          'http://localhost:4000/api/orders/confirm',
-          { sessionId },
-          { headers: authHeaders }
-        )
+  setLoading(true);
+
+  if (paymentStatus === 'success' && sessionId) {
+    // Confirm the payment and create order on the backend
+    axios.post(
+      `${import.meta.env.VITE_API_URL}/api/orders/confirm`,
+      { sessionId },
+      { headers: authHeaders }
+    )
           .then(({ data }) => {
             // Only clear cart when payment truly succeeded
             clearCart();
@@ -82,19 +83,19 @@ const CheckoutPage = () => {
     };
 
     try {
-      if (formData.paymentMethod === 'online') {
-        // Initiate payment session; do NOT create order or clear cart yet
-        const { data } = await axios.post(
-          'http://localhost:4000/api/orders',
-          payload,
-          { headers: authHeaders }
-        );
+  if (formData.paymentMethod === 'online') {
+    // Initiate payment session; do NOT create order or clear cart yet
+    const { data } = await axios.post(
+      `${import.meta.env.VITE_API_URL}/api/orders`,
+      payload,
+      { headers: authHeaders }
+    );
         // Redirect to external payment gateway
         window.location.href = data.checkoutUrl;
       } else {
         // Cash on Delivery: directly create order
         const { data } = await axios.post(
-          'http://localhost:4000/api/orders',
+          `${import.meta.env.VITE_API_URL}/api/orders`,
           payload,
           { headers: authHeaders }
         );

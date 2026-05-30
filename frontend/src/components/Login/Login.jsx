@@ -13,7 +13,7 @@ import {
 } from 'react-icons/fa';
 import { inputBase, iconClass } from '../../assets/dummydata';
 
-const url = 'http://localhost:4000'
+const url = import.meta.env.VITE_API_URL;
 
 const Login = ({ onLoginSuccess, onClose }) => {
   const [formData, setFormData] = useState({
